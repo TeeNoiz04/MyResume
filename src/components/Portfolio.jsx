@@ -77,7 +77,7 @@ const Portfolio = () => {
             <div className="relative">
               <div className="w-full h-96 bg-gradient-to-br from-orange-500/20 to-transparent rounded-lg overflow-hidden">
                 <img
-                  src="../public/img/avatar.jpg"
+                  src="img/avatar.jpg"
                   alt="Profile"
                   className="w-full h-full object-cover transition-all duration-300 hover:scale-105"
                 />
