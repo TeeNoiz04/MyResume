@@ -17,7 +17,7 @@ const ExperienceTree = () => {
       role: "Bussiness Analyst",
       company: "HiAI Company",
       location: "Ho Chi Minh City, Vietnam",
-      period: "6-2025 - 10-2025",
+      period: "4-2025 - 10-2025",
       type: "Full-time",
       description: "Analyzed business processes and gathered requirements to improve ERP solutions.",
       achievements: [

@@ -4,6 +4,7 @@ import ExperienceTree from './ExperienceTree.jsx';
 import PortfolioGallery from './PortfolioGallery.jsx';
 import GetInTouch from './GetInTouch.jsx';
 import AboutSection from './AboutSection.jsx';
+import AchievementSection from './AchievementSection.jsx';
 const Portfolio = () => {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   return (
@@ -26,7 +27,7 @@ const Portfolio = () => {
               <a href="#about" className="hover:text-orange-500 transition-colors">About</a>
               <a href="#resume" className="hover:text-orange-500 transition-colors">Resume</a>
               <a href="#portfolio" className="hover:text-orange-500 transition-colors">Portfolio</a>
-              {/* <a href="#blog" className="hover:text-orange-500 transition-colors">Blog</a> */}
+              <a href="#achievements" className="hover:text-orange-500 transition-colors">Achievements</a>
               <a href="#contact" className="hover:text-orange-500 transition-colors">Contact</a>
             </div>
 
@@ -48,7 +49,7 @@ const Portfolio = () => {
               <a href="#about" className="block hover:text-orange-500 transition-colors">About</a>
               <a href="#resume" className="block hover:text-orange-500 transition-colors">Resume</a>
               <a href="#portfolio" className="block hover:text-orange-500 transition-colors">Portfolio</a>
-              <a href="#blog" className="block hover:text-orange-500 transition-colors">Blog</a>
+              <a href="#achievements" className="block hover:text-orange-500 transition-colors">Achievements</a>
               <a href="#contact" className="block hover:text-orange-500 transition-colors">Contact</a>
             </div>
           </div>
@@ -56,7 +57,7 @@ const Portfolio = () => {
       </nav>
 
       {/* Hero Section */}
-      <section id="home" className="pt-24 pb-16 px-4 sm:px-6 lg:px-8">
+      <section id="home" className="pt-24 pb-16 px-4 sm:px-6 lg:px-8 ">
         <div className="max-w-7xl mx-auto">
           <div className="grid md:grid-cols-2 gap-12 items-center">
 
@@ -68,10 +69,31 @@ const Portfolio = () => {
               <h1 className="text-5xl md:text-6xl font-bold mb-6 text-white">
                 Business <span className="text-orange-500">Analyst</span>
               </h1>
+              <a
+                href="#contact"
+                className="
+                group relative inline-block px-8 py-4
+                bg-gradient-to-r from-orange-500 to-orange-600
+                text-white font-semibold rounded-xl
+                shadow-lg shadow-orange-500/50
+                hover:shadow-2xl hover:shadow-orange-500/60
+                transition-all duration-300
+                hover:scale-105
+                cursor-pointer
+                  "
+              >
+                <span className="relative z-10">Contact now</span>
+                <div
+                  className="
+                  absolute inset-0 rounded-xl opacity-0 group-hover:opacity-100
+                  bg-gradient-to-r from-orange-600 to-orange-700
+                  transition-opacity duration-300
+                "
+                />
+              </a>
 
-              <button className="bg-gradient-to-r from-orange-500 to-orange-600 hover:from-orange-600 hover:to-orange-700 text-white px-8 py-3 rounded transition-all duration-300 shadow-lg shadow-orange-500/30 cursor-pointer">
-                Contact Me
-              </button>
+
+
             </div>
 
             <div className="relative">
@@ -121,9 +143,9 @@ const Portfolio = () => {
           </div>
         </div>
       </section> */}
-     
-      <AboutSection />            
-      
+
+      <AboutSection />
+
 
       {/* Resume Section */}
       <section id="resume" className="py-16 px-4 sm:px-6 lg:px-8">
@@ -135,6 +157,11 @@ const Portfolio = () => {
         <PortfolioGallery />
       </section>
 
+      {/* Achivement Section */
+        <section id="achievements" className="py-16 px-4 sm:px-6 lg:px-8 min-h-screen bg-gradient-to-br from-slate-950 via-slate-900 to-orange-950 py-20 px-4">
+          <AchievementSection />
+        </section>
+      }
       {/* Contact Section */}
 
       <section id="contact" className="py-16 px-4 sm:px-6 lg:px-8">

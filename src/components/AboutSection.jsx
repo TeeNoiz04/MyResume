@@ -3,10 +3,10 @@ export default function AboutSection() {
         <section id="about" className="py-16 px-4 sm:px-6 lg:px-8 bg-gray-900/50">
             <div className="max-w-7xl mx-auto">
                 <div className="mb-12 text-center">
-                    <h2 className="text-orange-500 text-xl mb-4 font-semibold tracking-wide">
-                        Skills & Capabilities
-                    </h2>
 
+                    <h3 className="text-5xl md:text-6xl font-bold text-white mb-6">
+                       <span className="text-transparent bg-clip-text bg-gradient-to-r from-orange-400 to-orange-600">  Skills Capabilities</span>
+                    </h3>
                     <h3 className="text-4xl font-bold mb-6 text-white drop-shadow-lg">
                         Business Analyst with Technical Background
                     </h3>
@@ -95,7 +95,7 @@ export default function AboutSection() {
                                             border border-orange-500/40 rounded-xl
                                             shadow-md hover:shadow-orange-500/30
                                             hover:scale-105 transition-all cursor-pointer"
-                                                                    >
+                                        >
                                             {skill}
                                         </span>
                                     ))}
