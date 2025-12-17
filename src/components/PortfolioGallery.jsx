@@ -1,12 +1,14 @@
-import React, { useState } from 'react';
-import { X, ChevronLeft, ChevronRight } from 'lucide-react';
+import React, { useState, useEffect } from 'react';
+import { X, ChevronLeft, ChevronRight, Maximize2 } from 'lucide-react';
 import { Download } from "lucide-react";
-
+import Lightbox from "yet-another-react-lightbox";
+import Zoom from "yet-another-react-lightbox/plugins/zoom";
+import "yet-another-react-lightbox/styles.css";
 const PortfolioGallery = () => {
   const [activeTab, setActiveTab] = useState('all');
   const [selectedItem, setSelectedItem] = useState(null);
   const [currentImageIndex, setCurrentImageIndex] = useState(0);
-
+  const [isOpen, setIsOpen] = useState(false);
   const portfolioItems = [
     {
       id: 1,
@@ -359,6 +361,33 @@ const PortfolioGallery = () => {
     }
   };
 
+  useEffect(() => {
+    const handleKeyDown = (event) => {
+      if (!selectedItem) return;
+
+      switch (event.key) {
+        case 'Escape':
+          closeModal();
+          break;
+        case 'ArrowRight':
+          nextImage(); // Gọi hàm chuyển ảnh tiếp theo của bạn
+          break;
+        case 'ArrowLeft':
+          prevImage(); // Gọi hàm quay lại ảnh trước của bạn
+          break;
+        default:
+          break;
+      }
+    };
+
+    // Đăng ký sự kiện khi component mount hoặc selectedItem thay đổi
+    window.addEventListener('keydown', handleKeyDown);
+
+    // Quan trọng: Cleanup để tránh rò rỉ bộ nhớ khi đóng Modal
+    return () => {
+      window.removeEventListener('keydown', handleKeyDown);
+    };
+  }, [selectedItem, currentImageIndex]); // dependencies đảm bảo hàm có dữ liệu mới nhất
   return (
     <div className="max-w-7xl mx-auto">
       {/* Header */}
@@ -453,11 +482,23 @@ const PortfolioGallery = () => {
                   </div>
 
                   <div className="relative aspect-video rounded-2xl overflow-hidden bg-gray-900/50 border border-gray-700/30 group">
-                    <img
-                      src={selectedItem.images[currentImageIndex].src || selectedItem.images[currentImageIndex]}
-                      alt={selectedItem.title}
-                      className="w-full h-full object-cover"
-                    />
+                    <div
+                      className="relative aspect-video rounded-2xl overflow-hidden bg-gray-900/50 border border-gray-700/30 group cursor-zoom-in"
+                      onClick={() => setIsOpen(true)} // Click vào ảnh để phóng to
+                    >
+                      <img
+                        src={selectedItem.images[currentImageIndex].src || selectedItem.images[currentImageIndex]}
+                        alt={selectedItem.title}
+                        className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105"
+                      />
+
+                      {/* Nút chỉ dẫn phóng to */}
+                      <div className="absolute inset-0 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity bg-black/20">
+                        <div className="bg-black/50 p-3 rounded-full backdrop-blur-sm">
+                          <Maximize2 className="w-6 h-6 text-white" />
+                        </div>
+                      </div>
+                    </div>
                     <a
                       href={
                         selectedItem.images[currentImageIndex].src ||
@@ -497,27 +538,30 @@ const PortfolioGallery = () => {
                         </button>
                       </>
                     )}
-
-                    
-
-
                     {/* Image counter */}
                     <div className="absolute bottom-3 right-3 px-3 py-1 rounded-full bg-gray-900/80 backdrop-blur-sm border border-gray-700/50 text-sm text-gray-300">
                       {currentImageIndex + 1} / {selectedItem.images.length}
                     </div>
                   </div>
-                  <div className="py-5">
-                    <p className="
-                    text-gray-400 text-xs italic
-                    leading-relaxed mb-3
-                  ">
-                      <span className="text-orange-400 font-medium">P/s: </span>
-                      You can <b>open images in a new tab</b> to see better quality.
-                    </p>
-                  </div>
+
 
                 </div>
 
+                {/* Thêm Component Lightbox vào cuối Modal hoặc cuối Component */}
+                <Lightbox
+                  open={isOpen}
+                  close={() => setIsOpen(false)}
+                  index={currentImageIndex} // Đồng bộ với ảnh hiện tại
+                  slides={selectedItem.images.map(img => ({ src: img.src || img }))}
+                  plugins={[Zoom]} // Thêm tính năng Zoom
+                  // Tùy chỉnh giao diện cho hợp với tone màu của bạn
+                  styles={{
+                    container: { backgroundColor: "rgba(0, 0, 0, .9)" },
+                  }}
+                  on={{
+                    view: ({ index }) => setCurrentImageIndex(index) // Đồng bộ ngược lại khi chuyển ảnh trong Lightbox
+                  }}
+                />
                 {/* Right: Info and Thumbnails */}
                 <div className="lg:w-2/5 flex flex-col">
                   {/* Title and Description */}

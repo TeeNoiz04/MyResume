@@ -72,15 +72,7 @@ const ExperienceTree = () => {
                       : '0 10px 30px -15px rgba(0, 0, 0, 0.3)'
                   }}
                 >
-                  {/* Hover overlay */}
-                  <div className="absolute inset-0 bg-orange-500/0 group-hover:bg-orange-500/5 transition-all duration-500"></div>
-
-                  {/* Hover hint */}
-                  <div className="absolute top-4 right-4 opacity-0 group-hover:opacity-100 transition-opacity duration-300 hidden md:block pointer-events-none">
-                    <span className="text-xs text-white bg-orange-500/90 px-3 py-1 rounded-full shadow-lg">
-                      Click to expand
-                    </span>
-                  </div>
+                 
 
                   <div className="relative p-6">
                     {/* Header */}

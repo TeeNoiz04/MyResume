@@ -1,12 +1,57 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { Menu, X, Lightbulb, Briefcase, Mail } from 'lucide-react';
 import ExperienceTree from './ExperienceTree.jsx';
 import PortfolioGallery from './PortfolioGallery.jsx';
 import GetInTouch from './GetInTouch.jsx';
 import AboutSection from './AboutSection.jsx';
 import AchievementSection from './AchievementSection.jsx';
+import { motion } from "framer-motion";
 const Portfolio = () => {
+  const containerVariants = {
+    hidden: { opacity: 0, y: 20 },
+    visible: {
+      opacity: 1,
+      y: 0,
+      transition: { duration: 0.6, ease: "easeOut" }
+    }
+  };
+  const itemVariants = {
+    hidden: { y: 20, opacity: 0 },
+    visible: {
+      y: 0,
+      opacity: 1,
+      transition: { duration: 0.5, ease: "easeOut" },
+    },
+  };
+
+  const imageVariants = {
+    hidden: { scale: 0.8, opacity: 0 },
+    visible: {
+      scale: 1,
+      opacity: 1,
+      transition: { duration: 0.8, ease: "easeOut" },
+    },
+  };
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
+  useEffect(() => {
+    const hash = window.location.hash.substring(1); // Lấy hash từ URL (bỏ dấu #)
+    if (hash) {
+      // Delay một chút để đảm bảo trang đã render xong
+      setTimeout(() => {
+        const element = document.getElementById(hash);
+        if (element) {
+          const offset = 80;
+          const elementPosition = element.getBoundingClientRect().top;
+          const offsetPosition = elementPosition + window.pageYOffset - offset;
+
+          window.scrollTo({
+            top: offsetPosition,
+            behavior: 'smooth'
+          });
+        }
+      }, 100);
+    }
+  }, []);
   return (
     <div className="min-h-screen bg-gradient-to-br from-gray-900 via-gray-800 to-black text-white">
       {/* Navigation */}
@@ -57,94 +102,63 @@ const Portfolio = () => {
       </nav>
 
       {/* Hero Section */}
-      <section id="home" className="pt-24 pb-16 px-4 sm:px-6 lg:px-8 ">
-        <div className="max-w-7xl mx-auto">
+      <section id="home" className="pt-24 pb-16 px-4 sm:px-6 lg:px-8 overflow-hidden">
+        <motion.div
+          className="max-w-7xl mx-auto"
+          variants={containerVariants}
+          initial="hidden"
+          whileInView="visible"
+          viewport={{ once: false }} 
+        >
           <div className="grid md:grid-cols-2 gap-12 items-center">
 
-            <div>
-              <p className="text-white/70 mb-2">
+            {/* CỘT TRÁI: TEXT */}
+            <div className="space-y-6">
+              <motion.p variants={itemVariants} className="text-white/70 mb-2">
                 I AM THANH DUOC
-              </p>
+              </motion.p>
 
-              <h1 className="text-5xl md:text-6xl font-bold mb-6 text-white">
+              <motion.h1 variants={itemVariants} className="text-5xl md:text-6xl font-bold text-white">
                 Business <span className="text-orange-500">Analyst</span>
-              </h1>
-              <a
-                href="#contact"
-                className="
-                group relative inline-block px-8 py-4
-                bg-gradient-to-r from-orange-500 to-orange-600
-                text-white font-semibold rounded-xl
-                shadow-lg shadow-orange-500/50
-                hover:shadow-2xl hover:shadow-orange-500/60
-                transition-all duration-300
-                hover:scale-105
-                cursor-pointer
-                  "
-              >
-                <span className="relative z-10">Contact now</span>
-                <div
-                  className="
-                  absolute inset-0 rounded-xl opacity-0 group-hover:opacity-100
-                  bg-gradient-to-r from-orange-600 to-orange-700
-                  transition-opacity duration-300
-                "
-                />
-              </a>
+              </motion.h1>
 
-
-
+              <motion.div variants={itemVariants}>
+                <a
+                  href="#contact"
+                  className="group relative inline-block px-8 py-4 bg-gradient-to-r from-orange-500 to-orange-600 text-white font-semibold rounded-xl shadow-lg shadow-orange-500/50 transition-all duration-300 cursor-pointer"
+                >
+                  <span className="relative z-10">Contact now</span>
+                  <div className="absolute inset-0 rounded-xl opacity-0 group-hover:opacity-100 bg-gradient-to-r from-orange-600 to-orange-700 transition-opacity duration-300" />
+                </a>
+              </motion.div>
             </div>
 
-            <div className="relative">
-              <div className="w-full h-96 bg-gradient-to-br from-orange-500/20 to-transparent rounded-lg overflow-hidden">
+            {/* CỘT PHẢI: IMAGE */}
+            <motion.div
+              className="relative"
+              variants={imageVariants}
+            >
+              <div className="w-full h-96 bg-gradient-to-br from-orange-500/20 to-transparent rounded-lg overflow-hidden border border-orange-500/10">
                 <img
                   src="img/avatar.jpg"
                   alt="Profile"
-                  className="w-full h-full object-cover transition-all duration-300 hover:scale-105"
+                  className="w-full h-full object-cover transition-all duration-300 hover:scale-110"
                 />
               </div>
-            </div>
+
+              {/* Trang trí thêm: Một hình tròn phát sáng phía sau ảnh */}
+              <div className="absolute -z-10 -top-10 -right-10 w-40 h-40 bg-orange-500/20 blur-[80px] rounded-full" />
+            </motion.div>
 
           </div>
-        </div>
+        </motion.div>
       </section>
 
 
       {/* About Section */}
-      {/* <section id="about" className="py-16 px-4 sm:px-6 lg:px-8 bg-gray-900/50">
-        <div className="max-w-7xl mx-auto">
-          <div className="grid md:grid-cols-2 gap-12 items-center">
-
-            <div className="relative">
-              <div className="w-full h-96 bg-gradient-to-br from-orange-500/20 to-transparent rounded-lg overflow-hidden">
-                <img
-                  src="https://images.unsplash.com/photo-1519681393784-d120267933ba?w=600&h=600&fit=crop"
-                  alt="About"
-                  className="w-full h-full object-cover"
-                />
-              </div>
-            </div>
-
-            <div>
-              <h2 className="text-orange-500 text-xl mb-4">
-                About Me
-              </h2>
-
-              <h3 className="text-4xl font-bold mb-6 text-white">
-                I am a Business <br />Analyst
-              </h3>
-
-              <p className="text-white/80 leading-relaxed">
-                I enjoy understanding how people work and helping turn their needs into simple, practical ERP solutions. With experience in inventory, sales, accounting, and POS systems, and a background in web UI development using HTML, CSS/SCSS, JavaScript, React, and Bootstrap, I like building systems that are easy to use and actually helpful for everyday work.
-              </p>
-            </div>
-
-          </div>
-        </div>
-      </section> */}
-
-      <AboutSection />
+      <section id="about" className="py-16 px-4 sm:px-6 lg:px-8 bg-gray-900/50">
+        <AboutSection />
+      </section>
 
 
       {/* Resume Section */}
