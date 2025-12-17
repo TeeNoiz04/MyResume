@@ -54,12 +54,12 @@ const GetInTouch = () => {
     //   description: 'Seeking hands-on experience in business analysis',
     //   gradient: 'from-emerald-500 to-teal-500'
     // },
-    {
-      icon: GraduationCap,
-      title: 'Fresher Roles',
-      description: 'Ready to start my professional journey',
-      gradient: 'from-violet-500 to-purple-500'
-    },
+    // {
+    //   icon: GraduationCap,
+    //   title: 'Fresher Roles',
+    //   description: 'Ready to start my professional journey',
+    //   gradient: 'from-violet-500 to-purple-500'
+    // },
     {
       icon: Rocket,
       title: 'Junior Roles',
