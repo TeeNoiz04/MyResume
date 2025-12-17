@@ -48,12 +48,12 @@ const GetInTouch = () => {
   ];
 
   const opportunities = [
-    {
-      icon: Briefcase,
-      title: 'Internships',
-      description: 'Seeking hands-on experience in business analysis',
-      gradient: 'from-emerald-500 to-teal-500'
-    },
+    // {
+    //   icon: Briefcase,
+    //   title: 'Internships',
+    //   description: 'Seeking hands-on experience in business analysis',
+    //   gradient: 'from-emerald-500 to-teal-500'
+    // },
     {
       icon: GraduationCap,
       title: 'Fresher Roles',
@@ -62,8 +62,8 @@ const GetInTouch = () => {
     },
     {
       icon: Rocket,
-      title: 'Learning',
-      description: 'Always eager to learn and grow',
+      title: 'Junior Roles',
+      description: 'Eager to contribute and grow in a dynamic team',
       gradient: 'from-amber-500 to-orange-500'
     }
   ];
