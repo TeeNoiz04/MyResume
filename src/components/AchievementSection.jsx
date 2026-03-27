@@ -19,7 +19,7 @@ export default function AchievementSection() {
     },
     {
       icon: Star,
-      number: "3.66/4.0",
+      number: "3.68/4.0",
       title: "GPA",
       description: "Academic performance and excellence"
     },
@@ -31,7 +31,7 @@ export default function AchievementSection() {
     },
     {
       icon: Zap,
-      number: "6+",
+      number: "10+",
       title: "Months Experience",
       description: "Hands-on experience through real-world projects"
     },
